@@ -2,8 +2,8 @@
 import conn from "./connection.ts";
 import { signal } from "https://deno.land/std@0.166.0/signal/mod.ts";
 import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
-import { rand_bigint } from "https://deno.land/x/mtproto@v0.3.0/common/utils.ts";
-import global from "https://deno.land/x/mtproto@v0.3.0/gen/api.js";
+import { rand_bigint } from "https://deno.land/x/mtproto@v0.3.0.1/common/utils.ts";
+import global from "https://deno.land/x/mtproto@v0.3.0.1/gen/api.js";
 
 const db = new DB("mon.db");
 const admin = BigInt(

@@ -1,4 +1,4 @@
-import global from "https://deno.land/x/mtproto@v0.3.0/gen/api.d.ts";
+import global from "https://deno.land/x/mtproto@v0.3.0.1/gen/api.d.ts";
 import conn from "./connection.ts";
 
 const rpc = await conn.rpc();
