@@ -26,6 +26,11 @@ const queryChannelAccessHash = db.prepareQuery<[string]>(
   "select hash from channel_hashes where id = :id"
 );
 
+function compileRule(str: string) {
+  if (str.startsWith("/")) new RegExp(str.slice(1));
+  return str;
+}
+
 try {
   async function getChatList() {
     const chat_list = [] as global.Chat[];
@@ -48,7 +53,7 @@ try {
       if (chat._ === "channel" && chat.access_hash)
         insertChannelAccessHash.execute({
           id: chat.id,
-          hash: chat.access_hash + '',
+          hash: chat.access_hash + "",
         });
     }
     ret = queryChannelAccessHash.first({ id });
@@ -143,11 +148,27 @@ try {
           });
           if (rules.length > 0) {
             for (const [rule] of rules) {
-              if (
-                e.message.message.match(
-                  rule.startsWith("/") ? new RegExp(rule.slice(1)) : rule
-                )
-              ) {
+              let result = false;
+              if (rule.startsWith("file:")) {
+                if (
+                  e.message.media?._ === "messageMediaDocument" &&
+                  e.message.media.document?._ === "document"
+                ) {
+                  for (const attr of e.message.media.document.attributes) {
+                    if (attr._ === "documentAttributeFilename") {
+                      if (
+                        attr.file_name.match(
+                          compileRule(rule.slice("file:".length))
+                        )
+                      )
+                        result = true;
+                      break;
+                    }
+                  }
+                }
+              } else if (e.message.message.match(compileRule(rule)))
+                result = true;
+              if (result) {
                 const access_hash = await getChannelAccessHash(
                   e.message.peer_id.channel_id
                 );
