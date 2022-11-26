@@ -211,9 +211,9 @@ try {
     break;
   }
   sig.dispose();
-  conn.setup_rpc = undefined;
 } catch (err) {
   console.error(err);
 } finally {
+  conn.setup_rpc = undefined;
   await conn.shutdown();
 }
