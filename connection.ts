@@ -1,7 +1,7 @@
-import MTProto from "https://deno.land/x/mtproto@v0.3.0.2/mod.ts";
-import factory from "https://deno.land/x/mtproto@v0.3.0.2/transport/connection/deno-tcp.ts";
-import Abridged from "https://deno.land/x/mtproto@v0.3.0.2/transport/codec/abridged.ts";
-import JsonDB from "https://deno.land/x/mtproto@v0.3.0.2/storage/jsondb.ts";
+import MTProto from "https://deno.land/x/mtproto@v0.3.0.3/mod.ts";
+import factory from "https://deno.land/x/mtproto@v0.3.0.3/transport/connection/deno-tcp.ts";
+import Abridged from "https://deno.land/x/mtproto@v0.3.0.3/transport/codec/abridged.ts";
+import JsonDB from "https://deno.land/x/mtproto@v0.3.0.3/storage/jsondb.ts";
 
 const storage = new JsonDB("session.json");
 const proto = new MTProto({

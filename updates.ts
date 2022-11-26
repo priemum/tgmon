@@ -1,8 +1,8 @@
 import conn from "./connection.ts";
 import { signal } from "https://deno.land/std@0.166.0/signal/mod.ts";
 import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
-import { rand_bigint } from "https://deno.land/x/mtproto@v0.3.0.2/common/utils.ts";
-import global from "https://deno.land/x/mtproto@v0.3.0.2/gen/api.js";
+import { rand_bigint } from "https://deno.land/x/mtproto@v0.3.0.3/common/utils.ts";
+import global from "https://deno.land/x/mtproto@v0.3.0.3/gen/api.js";
 
 const db = new DB("mon.db");
 const admin = BigInt(
@@ -205,12 +205,13 @@ try {
       }
     });
   };
-  await conn.rpc();
+  conn.setup_rpc(await conn.rpc());
   const sig = signal("SIGINT");
   for await (const _ of sig) {
     break;
   }
   sig.dispose();
+  conn.setup_rpc = undefined;
 } catch (err) {
   console.error(err);
 } finally {
