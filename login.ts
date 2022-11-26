@@ -1,5 +1,5 @@
 import conn from "./connection.ts";
-import { sendCode } from "https://deno.land/x/mtproto@v0.3.0.1/auth/user.ts";
+import { sendCode } from "https://deno.land/x/mtproto@v0.3.0.2/auth/user.ts";
 import {
   colors,
   Input,

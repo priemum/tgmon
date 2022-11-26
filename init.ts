@@ -8,7 +8,7 @@ import {
   prompt,
 } from "https://deno.land/x/cliffy@v0.25.4/mod.ts";
 import conn from "./connection.ts";
-import { sendCode } from "https://deno.land/x/mtproto@v0.3.0.1/auth/user.ts";
+import { sendCode } from "https://deno.land/x/mtproto@v0.3.0.2/auth/user.ts";
 
 const db = new DB("mon.db");
 db.execute("create table if not exists rules (id integer, keyword text);");
