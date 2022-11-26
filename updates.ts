@@ -172,6 +172,14 @@ try {
                 const access_hash = await getChannelAccessHash(
                   e.message.peer_id.channel_id
                 );
+                await rpc.api.channels.readHistory({
+                  channel: {
+                    _: "inputChannel",
+                    channel_id: e.message.peer_id.channel_id,
+                    access_hash,
+                  },
+                  max_id: e.message.id,
+                });
                 await rpc.api.messages.forwardMessages({
                   from_peer: {
                     _: "inputPeerChannel",
