@@ -10,7 +10,7 @@ async function getChatList() {
       except_ids: chat_list.map((x) => x.id),
     });
     chat_list.push(...newlist.chats);
-    if (newlist._ === "messages.chats") {
+    if (newlist._ === "messages.chats") {          
       break;
     }
   }
